@@ -5,7 +5,6 @@ https://github.com/alignan/IPv6-WSN-book
 DO THIS TUTORIAL - IT HELPS
 
 WHAT WE WILL DO
-
 https://github.com/contiki-os/contiki/tree/master/examples/nrf52dk/coap-demo
 
 This is the CoAP demo for client and server.
@@ -17,7 +16,6 @@ https://github.com/contiki-os/contiki/blob/master/apps/er-coap/er-coap-constants
 This is where CoAP parameters are defined as constants.
 
 https://github.com/contiki-os/contiki/blob/master/apps/er-coap/er-coap-transactions.c
-
 https://github.com/contiki-os/contiki/blob/master/apps/er-coap/er-coap-transactions.h
 This is the CoAP header and source code for CoAP transactions. 
 Exponential backoff is defined at function void coap_send_transaction(...).
@@ -26,7 +24,6 @@ Once we have implemented adaptive RTO calculations, we can modify exponential ba
 Lastly, we need to implement RTO aging.
 
 https://github.com/contiki-os/contiki/blob/master/apps/er-coap/er-coap-observe-client.c
-
 https://github.com/contiki-os/contiki/blob/master/apps/er-coap/er-coap-observe-client.h
 Observation is defined here. I haven't looked into it yet.
 
