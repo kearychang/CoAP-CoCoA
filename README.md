@@ -5,6 +5,7 @@ https://github.com/alignan/IPv6-WSN-book
 DO THIS TUTORIAL - IT HELPS
 
 WHAT WE WILL DO
+
 https://github.com/contiki-os/contiki/tree/master/examples/nrf52dk/coap-demo
 This is the CoAP demo for client and server.
 This code should be understood. We will modify the CoAP base code, then import the modified code as motes in our simulation. In README, they mention "Note that before any CoAP requests can be made you'll need to configure an IPv6 connection to the device and assign a routable IPv6 address.
