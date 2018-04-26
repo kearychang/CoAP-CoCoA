@@ -79,8 +79,8 @@ coap_receive(void)
 
   if(uip_newdata()) {
 
-    //PRINTF("receiving UDP datagram from: ");
-    //PRINT6ADDR(&UIP_IP_BUF->srcipaddr);
+    PRINTF("receiving UDP datagram from: ");
+    PRINT6ADDR(&UIP_IP_BUF->srcipaddr);
     //PRINTF(":%u\n  Length: %u\n", uip_ntohs(UIP_UDP_BUF->srcport),
     //       uip_datalen());
 
@@ -228,13 +228,13 @@ coap_receive(void)
       } else {
 
         if(message->type == COAP_TYPE_CON && message->code == 0) {
-          //PRINTF("Received Ping\n");
+          PRINTF("Received Ping\n");
           erbium_status_code = PING_RESPONSE;
         } else if(message->type == COAP_TYPE_ACK) {
           /* transactions are closed through lookup below */
-          //PRINTF("Received ACK\n");
+          PRINTF("Received ACK\n");
         } else if(message->type == COAP_TYPE_RST) {
-          //PRINTF("Received RST\n");
+          PRINTF("Received RST\n");
           /* cancel possible subscriptions */
           coap_remove_observer_by_mid(&UIP_IP_BUF->srcipaddr,
                                       UIP_UDP_BUF->srcport, message->mid);
@@ -411,12 +411,12 @@ PT_THREAD(coap_blocking_request
 
       ct = clock_time();
       coap_send_transaction(state->transaction);
-      //PRINTF("Requested #%lu (MID %u)\n", state->block_num, request->mid);
+      PRINTF("Requested #%lu (MID %u)\n", state->block_num, request->mid);
 
       PT_YIELD_UNTIL(&state->pt, ev == PROCESS_EVENT_POLL);
 
       if(!state->response) {
-        //PRINTF("Server not responding\n");
+        PRINTF("Server not responding\n");
         PT_EXIT(&state->pt);
       }
 
