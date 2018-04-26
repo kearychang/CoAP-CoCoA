@@ -377,7 +377,7 @@ PT_THREAD(coap_blocking_request
 
   static uint8_t more;
   static uint32_t res_block;
-  static uint8_t block_error;.
+  static uint8_t block_error;
   static clock_time_t ct;
   static clock_time_t ct_delay;
 
@@ -395,7 +395,7 @@ PT_THREAD(coap_blocking_request
 
   do {
     request->mid = coap_get_mid();
-    if((state->transaction = cocoa_new_transaction(request->rto,request->mid, remote_ipaddr,
+    if((state->transaction = cocoa_new_transaction(state->rto,request->mid, remote_ipaddr,
                                                   remote_port))) {
       state->transaction->callback = coap_blocking_request_callback;
       state->transaction->callback_data = state;
