@@ -377,7 +377,9 @@ PT_THREAD(coap_blocking_request
 
   static uint8_t more;
   static uint32_t res_block;
-  static uint8_t block_error;
+  static uint8_t block_error;.
+  static clock_time_t ct;
+  static clock_time_t ct_delay;
 
   state->rto_weak = 2 * CLOCK_SECOND;
   state->rto_strong = 2 * CLOCK_SECOND;
@@ -393,7 +395,7 @@ PT_THREAD(coap_blocking_request
 
   do {
     request->mid = coap_get_mid();
-    if((state->transaction = coap_new_transaction(request->mid, remote_ipaddr,
+    if((state->transaction = cocoa_new_transaction(request->rto,request->mid, remote_ipaddr,
                                                   remote_port))) {
       state->transaction->callback = coap_blocking_request_callback;
       state->transaction->callback_data = state;
@@ -407,7 +409,7 @@ PT_THREAD(coap_blocking_request
                                                               transaction->
                                                               packet);
 
-      clock_time_t ct = clock_time();
+      ct = clock_time();
       coap_send_transaction(state->transaction);
       //PRINTF("Requested #%lu (MID %u)\n", state->block_num, request->mid);
 
@@ -418,7 +420,7 @@ PT_THREAD(coap_blocking_request
         PT_EXIT(&state->pt);
       }
 
-      clock_time_t ct_delay = clock_time() - ct;
+      ct_delay = clock_time() - ct;
       if (state->transaction->retrans_counter <= 2) {
         state->rto_weak = (state->rto_weak >> 2) + ((ct_delay*3) >> 2);
         state->rto = ((state->rto * 3) >> 2) + (state->rto_weak >> 2);
