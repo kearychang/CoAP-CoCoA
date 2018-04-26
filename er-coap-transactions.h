@@ -47,7 +47,6 @@
  */
 #define COAP_RESPONSE_TIMEOUT_TICKS         (CLOCK_SECOND * COAP_RESPONSE_TIMEOUT)
 #define COAP_RESPONSE_TIMEOUT_BACKOFF_MASK  (long)((CLOCK_SECOND * COAP_RESPONSE_TIMEOUT * ((float)COAP_RESPONSE_RANDOM_FACTOR - 1.0)) + 0.5) + 1
-#define COAP_REQUEST_MAX_TRANSIT_WAIT_TICKS (CLOCK_SECOND * COAP_MAX_TRANSIT_WAIT)
 
 /* container for transactions with message buffer and retransmission info */
 typedef struct coap_transaction {
@@ -69,16 +68,16 @@ typedef struct coap_transaction {
                                                  * Use snprintf(buf, len+1, "", ...) to completely fill payload */
 } coap_transaction_t;
 
-void coap_register_as_transaction_handler(void);
+void coap_register_as_transaction_handler();
 
 coap_transaction_t *coap_new_transaction(uint16_t mid, uip_ipaddr_t *addr,
                                          uint16_t port);
-coap_transaction_t *cocoa_new_transaction(uint16_t var_backoff, uint16_t mid, uip_ipaddr_t *addr,
+coap_transaction_t *cocoa_new_transaction(uint32_t rto, uint16_t mid, uip_ipaddr_t *addr,
                                          uint16_t port);
 void coap_send_transaction(coap_transaction_t *t);
 void coap_clear_transaction(coap_transaction_t *t);
 coap_transaction_t *coap_get_transaction_by_mid(uint16_t mid);
 
-void coap_check_transactions(void);
+void coap_check_transactions();
 
 #endif /* COAP_TRANSACTIONS_H_ */
