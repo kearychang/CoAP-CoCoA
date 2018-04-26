@@ -114,27 +114,28 @@ coap_send_transaction(coap_transaction_t *t)
       PRINTF("Keeping transaction %u\n", t->mid);
 
       if(t->retrans_counter == 0) {
-        t->retrans_timer.timer.interval =
+    t->retrans_timer.timer.interval =
           COAP_RESPONSE_TIMEOUT_TICKS + (random_rand()
                                          %
                                          (clock_time_t)
                                          COAP_RESPONSE_TIMEOUT_BACKOFF_MASK);
-  PRINTF("init timeout\n");
-        PRINTF("Initial interval %f\n",
-               (float)t->retrans_timer.timer.interval / CLOCK_SECOND);
+    PRINTF("Initial interval %f\n",
+      (float)t->retrans_timer.timer.interval / CLOCK_SECOND);
       } else {
              if (t->var_backoff == 0) {
                     t->retrans_timer.timer.interval <<= 1;  /* double */
+            PRINTF("Doubled interval - ");
              } else if (t->var_backoff == 1) {
-                    t->retrans_timer.timer.interval = (t->retrans_timer.timer.interval*3)/2;
+                    t->retrans_timer.timer.interval = (t->retrans_timer.timer.interval*3)>>2;
+        PRINTF("x1.5 interval - ");
              } else if (t->var_backoff == 2) {
                     t->retrans_timer.timer.interval *= 3;
+        PRINTF("x3 interval - ");
              }
              if (t->retrans_timer.timer.interval > 32*CLOCK_SECOND) {
                     t->retrans_timer.timer.interval = 32*CLOCK_SECOND;
              }
-       //PRINTF("2x timeout\n");
-             PRINTF("Doubled (%u) interval %f\n", t->retrans_counter,
+             PRINTF("(%f) sec\n",
                     (float)t->retrans_timer.timer.interval / CLOCK_SECOND);
       }
 
@@ -202,7 +203,6 @@ coap_check_transactions()
   for(t = (coap_transaction_t *)list_head(transactions_list); t; t = t->next) {
     if(etimer_expired(&t->retrans_timer)) {
       ++(t->retrans_counter);
-      //PRINTF("Retransmitting \n");
       PRINTF("Retransmitting %u (%u)\n", t->mid, t->retrans_counter);
       coap_send_transaction(t);
     }
