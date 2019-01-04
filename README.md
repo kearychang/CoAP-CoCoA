@@ -1,4 +1,4 @@
-# CPS716
+# CoAP-CoCoA
 CoAP and Proxy
 
 https://github.com/alignan/IPv6-WSN-book
