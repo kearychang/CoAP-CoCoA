@@ -11,11 +11,7 @@ CoAP uses messages to provide reliable UDP messaging.
 Request and response are carried in CoAP messages
 There are 4 message types which is indicated by the value in 2 bit T in CoAP header.
 
-
-  CON (confirmable message)
-  NON (non-confirmable message)
-  ACK (to CON)
-  RST (reset to CON/NON)
+![](images/coap-message.jpg)
 
 When a Confirmable message (CON) is sent, it maintains an internal state for timeout and a counter.
 When timeout reaches 0 with no ACK, the counter is incremented and the Confirmable message (CON) is retransmitted with an increased timeout. This loops while the counter is less than MAX_RETRANSMIT.
