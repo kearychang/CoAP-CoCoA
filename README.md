@@ -1,5 +1,5 @@
 # CoAP-CoCoA
-This project implemented congestion control to the CoAP IoT protocol.
+This project implements variable congestion control to the CoAP IoT protocol.
 
 CoAP is an Internet application protocol for constrained nodes.
 The interaction model is similar to client/server model of HTTP with requests and responses. 
@@ -17,6 +17,15 @@ When a Confirmable message (CON) is sent, it maintains an internal state for tim
 When timeout reaches 0 with no ACK, the counter is incremented and the Confirmable message (CON) is retransmitted with an increased timeout. This loops while the counter is less than MAX_RETRANSMIT.
 At this point, the sender gives up.
 
+Since CoAP operates on top of UDP, CoAP must handle congestion control by itself.
+CoAP in RFC7252 describes increasing timeout by constant factor of 2. 
+This basic congestion control mechanism is not capable of adapting to network conditions.
+This project modifies the CoAP implementation in ContikiOS and implements a variable backoff timer.
+
+CoCoA is short for advanced congestion control for CoAP.
+![](img/results.jpg)
+
+By simulating a busy network, we see improved average performance of implementing CoCoA.
 
 https://github.com/alignan/IPv6-WSN-book
 DO THIS TUTORIAL - IT HELPS
