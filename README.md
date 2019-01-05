@@ -30,13 +30,13 @@ By simulating a busy network, we see improved average performance of implementin
 https://github.com/alignan/IPv6-WSN-book
 DO THIS TUTORIAL - IT HELPS
 
-INSTRUCTIONS
-This is Contiki 3.0. So make sure your version is the same.
-
-1) Replace CoAP source code inside /contiki/apps/er-coap with these .h and .c files.
-2) Then go to /contiki/tools/cooja and enter >ant run
-3) Load simulation file cocoa.csc.
-4) Enable server socket. Right click node in Cooja.
+##INSTRUCTIONS##
+1) Get Contiki3.0 http://www.contiki-os.org/download.html
+2) Using your VM VirtualBox, open Contiki image 
+3) Replace inside `/contiki/apps/er-coap` with .h and .c files from this repo
+4) `cd /contiki/tools/cooja` and enter `ant run`
+5) Load simulation file cocoa.csc.
+6) Enable server socket. Right click node in Cooja.
 Go to Mote Tools for Cooja 7 -> Serial Socket (SERVER) and set Listen port to X. Start it.
-5) Go to /contiki/examples/ipv6/rpl-border-router and enter >make connect-router-cooja
-6) Serial socket (SERVER) window should say connected.
+7) `cd /contiki/examples/ipv6/rpl-border-router` and enter `make connect-router-cooja`
+8) Serial socket (SERVER) window should say connected.
