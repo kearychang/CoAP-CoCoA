@@ -27,10 +27,7 @@ CoCoA is short for advanced congestion control for CoAP.
 
 By simulating a busy network, we see improved average performance of implementing CoCoA.
 
-https://github.com/alignan/IPv6-WSN-book
-DO THIS TUTORIAL - IT HELPS
-
-##INSTRUCTIONS##
+## INSTRUCTIONS ##
 1) Get Contiki3.0 http://www.contiki-os.org/download.html
 2) Using your VM VirtualBox, open Contiki image 
 3) Replace inside `/contiki/apps/er-coap` with .h and .c files from this repo
